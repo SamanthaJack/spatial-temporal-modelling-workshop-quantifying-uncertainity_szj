@@ -370,8 +370,7 @@ for t in range(i_calib_start, i_calib_end + 1):
         order=order, seasonal_order=seasonal_order,
         enforce_stationarity=False, enforce_invertibility=False,
     ).fit(disp=False)
-    fc_1 = m.get_forecast(steps=1, exog=x_next)
-    yhat_1 = fc_1.predicted_mean.iloc[0]
+    yhat_1 = m.forecast(steps=1, exog=x_next)[0]
 
     actual_1 = y_all[t]
     calib_errors.append(abs(actual_1 - yhat_1))
@@ -397,8 +396,8 @@ final_model = SARIMAX(
 ).fit(disp=False)
 
 h_test = i_test_end - i_test_start + 1
-fc_test = final_model.get_forecast(steps=h_test, exog=x_test)
-yhat_test = fc_test.predicted_mean.values
+n = len(y_train_calib)
+yhat_test = final_model.predict(start=n, end=n + h_test - 1, exog=x_test)
 
 test_dates = dates_all[i_test_start:i_test_end + 1]
 actual_test = y_all[i_test_start:i_test_end + 1]
