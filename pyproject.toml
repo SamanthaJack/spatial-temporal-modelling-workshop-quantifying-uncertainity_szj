@@ -1,0 +1,14 @@
+[project]
+name = "spatial-temporal-modelling-workshop"
+version = "0.1.0"
+description = "Workshop: Modelling forecast uncertainty for dengue case forecasting"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas",
+    "numpy",
+    "matplotlib",
+    "seaborn",
+    "statsmodels",
+    "scipy",
+    "pmdarima",
+]
